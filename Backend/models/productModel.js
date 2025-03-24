@@ -2,15 +2,15 @@ import { boolean, required } from 'joi'
 import mongoose from 'mongoose'
 const productSchema=new mongoose.Schema({
     name:{
-        type:String(),
+        type:String,
         required:true,
     },
     description:{
-        type:String(),
+        type:String,
         required:true,
     },
     price:{
-        type:Number(),
+        type:Number,
         required:true,
     },
     image:{
@@ -18,11 +18,11 @@ const productSchema=new mongoose.Schema({
         required:true,
     },
     category:{
-        type:String(),
+        type:String,
         required:true,
     },
     subCategory:{
-        type:String(),
+        type:String,
         required:true,
     },
     sizes:{
@@ -33,11 +33,11 @@ const productSchema=new mongoose.Schema({
         type:boolean,
     },
     date:{
-        type:Number(),
+        type:Number,
         required:true,
     },
 })
 
 const productModel=mongoose.models.product || mongoose.model("product",productSchema)
 
-export default productModel
+export default productMod
