@@ -6,7 +6,7 @@ import Add from "./Pages/Add";
 import List from "./Pages/List";
 import Orders from "./Pages/Orders";
 import { useState } from "react";
-import Login from "./Components/login";
+import Login from "./Components/Login";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
