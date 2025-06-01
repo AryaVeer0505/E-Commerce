@@ -1,4 +1,3 @@
-import { boolean, required } from 'joi'
 import mongoose from 'mongoose'
 const productSchema=new mongoose.Schema({
     name:{
@@ -30,7 +29,7 @@ const productSchema=new mongoose.Schema({
         required:true,
     },
     bestSeller:{
-        type:boolean,
+        type:Boolean,
     },
     date:{
         type:Number,
@@ -40,4 +39,4 @@ const productSchema=new mongoose.Schema({
 
 const productModel=mongoose.models.product || mongoose.model("product",productSchema)
 
-export default productMod
+export default productModel
