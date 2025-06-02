@@ -2,23 +2,27 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { backendUrl } from "../App";
-import {ToastContainer, toast} from "react-toastify"
-const Login = ({setToken}) => {
+import { ToastContainer, toast } from "react-toastify";
+const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
-      const response=await axios.post(backendUrl+ `/api/user/admin`,{email,password})
-      if(response.data.success){
-          setToken(response.data.token)
-      }
-      else{
-        toast.error(response.data.message,{position:"top-center"})
+      const response = await axios.post(backendUrl + `/api/user/admin`, {
+        email,
+        password,
+      });
+
+      if (response.data.success) {
+        setToken(response.data.token);
+      } else {
+        toast.error(response.data.message, { position: "top-center" });
       }
     } catch (error) {
-        console.log(error);
-         toast.error(response.message,{position:"top-center"}) 
+      console.log(error);
+      toast.error(error.response?.data?.message || "Login failed", { position: "top-center" });
+
     }
   };
   return (
@@ -58,7 +62,7 @@ const Login = ({setToken}) => {
           </button>
         </form>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

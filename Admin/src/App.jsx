@@ -1,40 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Sidebar from "./Components/Sidebar";
-import { Routes, Route } from "react-router-dom";
 import Add from "./Pages/Add";
 import List from "./Pages/List";
 import Orders from "./Pages/Orders";
-import { useState } from "react";
 import Login from "./Components/Login";
-import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
-export const backendUrl=import.meta.env.VITE_BACKEND_URL
-export const currency='$'
-const App = () => {
-  const [token, setToken] = useState(localStorage.getItem('token')?localStorage.getItem('token'):"");
+// Constants
+export const backendUrl = import.meta.env.VITE_BACKEND_URL;
+export const currency = "$";
 
-  useEffect(()=>{
-     localStorage.setItem('token',token)
-  },[token])
+const App = () => {
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
+
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("token", token);
+    } else {
+      localStorage.removeItem("token");
+    }
+  }, [token]);
 
   return (
     <div className="bg-gray-50 min-h-screen">
+      <ToastContainer />
       {token === "" ? (
-        <Login setToken={setToken}/>
+        <Login setToken={setToken} />
       ) : (
         <>
-        <ToastContainer/>
-          <Navbar setToken={setToken}/>
+          <Navbar setToken={setToken} />
           <hr />
           <div className="flex w-full">
             <Sidebar />
-            <div className="w-[70%] mx-auto ml-[mx(5vw,25px)] my-8 text-gray-600 text-base">
+            <div className="w-[70%] mx-auto ml-[max(5vw,25px)] my-8 text-gray-600 text-base">
               <Routes>
-                <Route path="/add" element={<Add token={token}/>} />
-                <Route path="/list" element={<List token={token}/>} />
-                <Route path="/orders" element={<Orders token={token}/>} />
+                <Route path="/add" element={<Add token={token} />} />
+                <Route path="/list" element={<List token={token} />} />
+                <Route path="/orders" element={<Orders token={token} />} />
               </Routes>
             </div>
           </div>
